@@ -1,0 +1,19 @@
+{
+  "name": "blog-post-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "client": "cd .. && cd client && npm run dev",
+    "server": "cd .. && cd server && node index.js",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pavel Provotorov",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "fastify": "^4.26.1"
+  }
+}
