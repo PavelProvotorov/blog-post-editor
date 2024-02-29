@@ -1,8 +1,13 @@
 import Fastify from 'fastify'
+import routes from './routes.js'
+import {addPostScheme} from './schemes.js'
 
 const fastify = Fastify({
     logger: true
 })
+
+fastify.register(routes)
+fastify.addSchema(addPostScheme)
 
 fastify.get('/', function (request, reply) {
     reply.send({ hello: 'world' })

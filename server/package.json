@@ -2,11 +2,11 @@
   "name": "blog-post-editor",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "client": "cd .. && cd client && npm run dev",
-    "server": "cd .. && cd server && node index.js",
+    "server": "cd .. && cd server && node server.js",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "concurrently": "^8.2.2",
-    "fastify": "^4.26.1"
+    "fastify": "^4.26.1",
+    "sqlite3": "^5.1.7"
   }
 }
