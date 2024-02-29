@@ -8,7 +8,6 @@ let database
     await checkForFolder(DATA_FOLDER_PATH)
     database = await initDatabase()
     await initDatabaseTables()
-    await getAllPostEntries()
 })();
 
 async function initDatabase() {
@@ -47,10 +46,10 @@ async function createNewPostsTable() {
             database.run(`
                 CREATE TABLE IF NOT EXISTS posts (
                     id INTEGER PRIMARY KEY NOT NULL, 
-                    title TEXT DEFAULT NULL,
-                    content TEXT DEFAULT NULL,
-                    created_dt NUMERIC DEFAULT NULL,
-                    updated_dt NUMERIC DEFAULT NULL
+                    title TEXT NOT NULL,
+                    content TEXT NOT NULL,
+                    created_dt NUMERIC NOT NULL,
+                    updated_dt NUMERIC NOT NULL
                 )
             `);
         });
@@ -59,7 +58,7 @@ async function createNewPostsTable() {
     }
 };
 
-async function addNewPostEntry(body) {
+async function addNewPost(body) {
     const datetime = getCurrentDateTime()
     let entry = Object.assign ({
         title: null,
@@ -83,7 +82,7 @@ async function addNewPostEntry(body) {
     }
 };
 
-async function getAllPostEntries() {
+async function getAllPosts() {
     try {
         const results = await new Promise((resolve, reject) => {
             const query = database.prepare(`
@@ -115,6 +114,6 @@ function getCurrentDateTime() {
 
 export { 
     initDatabase,
-    getAllPostEntries,
-    addNewPostEntry
+    getAllPosts,
+    addNewPost
 };

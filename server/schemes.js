@@ -1,9 +1,9 @@
-const addPostScheme = {
-    $id: "example",
-    type: 'object',
+const ADD_POST = {
+    $id: "add_post",
+    type: "object",
     properties: {
         "title": { 
-            type: 'string', 
+            type: "string", 
             minLength: 1,
             pattern: "^.*\\S.*$"
         },
@@ -17,9 +17,9 @@ const addPostScheme = {
         "title",
         "content"
     ],
-
+    additionalProperties: false,
 };
 
 export {
-    addPostScheme
+    ADD_POST
 }

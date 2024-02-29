@@ -1,11 +1,11 @@
-import {getAllPostEntries, addNewPostEntry} from './database.js'
+import {getAllPosts, addNewPost} from './database.js'
 
 async function routes (fastify, options) {
     fastify.route({
         method: "POST",
         url: "/api/posts",
         schema: {
-            body: { $ref: 'example#'}
+            body: { $ref: 'add_post#'}
         },
         attachValidation: true,
         handler: async function(req, res) {
@@ -17,7 +17,7 @@ async function routes (fastify, options) {
                         error: "Invalid JSON payload"
                     })
                 }
-                await addNewPostEntry(req.body)
+                await addNewPost(req.body)
                 return res.status(200).send({
                     message: "New post created"
                 });
