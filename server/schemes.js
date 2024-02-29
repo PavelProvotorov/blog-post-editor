@@ -5,12 +5,12 @@ const addPostScheme = {
         "title": { 
             type: 'string', 
             minLength: 1,
-            pattern: "^(?=.*\S).+$"
+            pattern: "^.*\\S.*$"
         },
         "content": { 
             type: 'string',
             minLength: 1,
-            pattern: "^(?=.*\S).+$"
+            pattern: "^.*\\S.*$"
         },
     },
     required: [

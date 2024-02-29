@@ -9,21 +9,20 @@ async function routes (fastify, options) {
         },
         attachValidation: true,
         handler: async function(req, res) {
+            res.type('application/json')
             try {
                 if (req.validationError) {
-                    // console.log(req.validationError)
-                    return res.code(400)
-                    .send({
-                        message: req.validationError.message
+                    console.error(req.validationError)
+                    return res.code(400).send({
+                        error: "Invalid JSON payload"
                     })
                 }
                 await addNewPostEntry(req.body)
-                res.type('application/json').status(200)
-                .send({
-                    message: "New post created!"
+                return res.status(200).send({
+                    message: "New post created"
                 });
             } catch (err) {
-                res.status(500).send({
+                return res.status(500).send({
                     error: "Internal server error"
                 })
             }
