@@ -5,9 +5,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "client": "cd .. && cd client && npm run dev",
     "server": "cd .. && cd server && node server.js",
-    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "dev": "concurrently \"npm run server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pavel Provotorov",
