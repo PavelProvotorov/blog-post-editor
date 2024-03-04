@@ -26,7 +26,7 @@ async function checkForFolder(path) {
         if (error.code === 'ENOENT') {
             await createNewFolder(path);
         } else {
-            throw error;
+            throw err;
         }
     }
 };
@@ -34,9 +34,8 @@ async function checkForFolder(path) {
 async function createNewFolder(path) {
     try {
         await fs.mkdir(path);
-    } catch (error) {
-        console.error("Error creating /data folder:", error);
-        throw error;
+    } catch (err) {
+        throw err;
     }
 };
 
@@ -53,8 +52,8 @@ async function createNewPostsTable() {
                 )
             `);
         });
-    } catch (error) {
-        throw error;
+    } catch (err) {
+        throw err;
     }
 };
 
@@ -77,8 +76,8 @@ async function addNewPost(body) {
         `);
         query.run(entry.title, entry.content, entry.created_dt, entry.updated_dt);
         query.finalize();
-    } catch (error) {
-        throw error;
+    } catch (err) {
+        throw err;
     }
 };
 
@@ -91,18 +90,18 @@ async function getAllPosts() {
                 FROM 
                     posts
             `);
-            query.all((error, rows) => {
-                if (error) {
-                    reject(error);
+            query.all((err, rows) => {
+                if (err) {
+                    reject(err);
                 } else {
-                    resolve(rows);
+                    resolve(err);
                 }
                 query.finalize();
             });
         });
         return results;
-    } catch (error) {
-        throw error;
+    } catch (err) {
+        throw err;
     }
 };
 
