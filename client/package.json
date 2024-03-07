@@ -1,0 +1,13 @@
+{
+  "name": "blog-post-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {},
+  "author": "Pavel Provotorov",
+  "license": "MIT",
+  "dependencies": {
+    "htmx.org": "^1.9.10"
+  }
+}
