@@ -81,20 +81,21 @@ async function addNewPost(body) {
     }
 };
 
+
 async function getAllPosts() {
     try {
-        const results = await new Promise((resolve, reject) => {
-            const query = database.prepare(`
+        const query = await database.prepare(`
                 SELECT
                     *
                 FROM 
                     posts
-            `);
+        `);
+        const results = await new Promise((resolve, reject) => {
             query.all((err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(err);
+                    resolve(rows);
                 }
                 query.finalize();
             });

@@ -2,6 +2,27 @@ import {getAllPosts, addNewPost} from './database.js'
 
 async function routes (fastify, options) {
     fastify.route({
+        method: "GET",
+        url: "/api/posts",
+        schema: {
+        },
+        attachValidation: false,
+        handler: async function(req, res) {
+            res.type('application/json')
+            try {
+                let data = await getAllPosts()
+                return res.status(200).send({
+                    data
+                });
+            } catch (err) {
+                return res.status(500).send({
+                    error: "Internal server error"
+                })
+            }
+        }
+    });
+
+    fastify.route({
         method: "POST",
         url: "/api/posts",
         schema: {
