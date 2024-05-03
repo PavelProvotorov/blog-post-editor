@@ -1,3 +1,5 @@
 # Logs
+deprecated
 node_modules
 data
+.env

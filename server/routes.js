@@ -1,21 +1,21 @@
 import {getAllPosts, addNewPost} from './database.js'
 
-async function routes (fastify, options) {
+async function app_routes (fastify, options) {
     fastify.route({
         method: "GET",
-        url: "/api/posts",
+        url: "/app/api/posts",
         schema: {
         },
         attachValidation: false,
-        handler: async function(req, res) {
-            res.type('application/json')
+        handler: async function(request, reply) {
+            reply.type('application/json')
             try {
                 let data = await getAllPosts()
-                return res.status(200).send({
+                return reply.status(200).send({
                     data
                 });
             } catch (err) {
-                return res.status(500).send({
+                return reply.status(500).send({
                     error: "Internal server error"
                 })
             }
@@ -24,26 +24,26 @@ async function routes (fastify, options) {
 
     fastify.route({
         method: "POST",
-        url: "/api/posts",
+        url: "/app/api/posts",
         schema: {
             body: { $ref: 'add_post#'}
         },
         attachValidation: true,
-        handler: async function(req, res) {
-            res.type('application/json')
+        handler: async function(request, reply) {
+            reply.type('application/json')
             try {
-                if (req.validationError) {
-                    console.error(req.validationError)
-                    return res.code(400).send({
+                if (request.validationError) {
+                    console.error(request.validationError)
+                    return reply.code(400).send({
                         error: "Invalid JSON payload"
                     })
                 }
-                await addNewPost(req.body)
-                return res.status(200).send({
+                await addNewPost(request.body)
+                return reply.status(200).send({
                     message: "New post created"
                 });
             } catch (err) {
-                return res.status(500).send({
+                return reply.status(500).send({
                     error: "Internal server error"
                 })
             }
@@ -51,4 +51,41 @@ async function routes (fastify, options) {
     });
 };
 
-export default routes
+async function path_routes(fastify, options) {
+    fastify.get('/', {
+        prefixTrailingSlash: "no-slash",
+        preHandler: fastify.verifyCredentials
+    },
+        async function (request, reply) {
+            return reply.redirect('/app');;
+        });
+
+    fastify.get('/app', {
+        prefixTrailingSlash: "no-slash",
+        preHandler: fastify.verifyCredentials
+    },
+        async function (request, reply) {
+            let data = await getAllPosts()
+            return reply.view("/layouts/index.hbs", { data })
+        });
+
+    fastify.get('/login', {
+        prefixTrailingSlash: "no-slash",
+    },
+        async function (request, reply) {
+            return reply.view("/layouts/login.hbs", {})
+        });
+
+    fastify.get('/app/create', {
+        prefixTrailingSlash: "no-slash",
+        preHandler: fastify.verifyCredentials
+    },
+        async function (request, reply) {
+            return reply.view("/layouts/create.hbs", {})
+        });
+}
+
+export {
+    app_routes,
+    path_routes
+};
