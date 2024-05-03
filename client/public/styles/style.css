@@ -1,45 +1,42 @@
 :root {
     --box-shadow-minimal: 0px 3px 5px rgba(0, 0, 0, 0.04);
+    --box-shadow-hover: 0px 4px 8px -2px rgba(9, 30, 66, 0.25), 0px 0px 0px 1px rgba(9, 30, 66, 0.08);
     box-sizing: border-box;
 }
 
 * {
-    color: black;
     box-sizing: border-box;
+    font-family: "Baloo 2", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    color: black;
 }
 
-html {
-    /* Size */
-    min-height: 100vh;
-    height: fit-content;
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 body {
-    min-width: 320px;
-    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+#_page_wrapper_ {
+    min-height: 100%;
     height: fit-content;
 
     padding: 0px;
     margin: 0px;
 }
 
-#_page_wrapper_ {
-    display: flex;
-    justify-content: center;
-
-    min-height: 100%;
-    height: fit-content;
-
-    padding: 10px;
-    margin: 10px;
-}
-
 #_content_ {
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
 }
 
 #_navbar_wrapper_ {
@@ -64,13 +61,14 @@ body {
     
     box-shadow: var(--box-shadow-minimal);
     z-index: 1;
+    gap: 5px;
 }
 
-#_navbar_ > button {
-    all: unset;
+#_navbar_ > a {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    text-decoration: none;
     align-content: center;
 
     width: 50px;
@@ -82,8 +80,8 @@ body {
     margin: 0px;
 }
 
-#_navbar_ > button:hover {
-    background-color: #ffa07a;
+#_navbar_ > a:hover {
+    background-color: lightsalmon;
 }
 
 .material-symbols-outlined {
@@ -91,29 +89,142 @@ body {
     font-size: 48px;
 }
 
+#_grid_container_ {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(320px, 1fr));
+    padding: 5px;
+    gap: 5px;
+}
+
 #_post_card_list_ {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 10px;
+    gap: 5px;
+    padding: 5px;
     margin: 0;
 }
 
 .post-card {
-    background-color: rgb(255, 185, 177);
-    box-shadow: var(--box-shadow-minimal);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     min-width: 320px;
+    box-shadow: var(--box-shadow-minimal);
+    transition: box-shadow 0.2s ease;
+    background-color: lightsalmon;
     border-radius: 10px;
     padding: 20px;
     margin: 0;
 }
 
-.post-card > h1 {
-    text-decoration: underline;
+.post-card-blank {
+    min-width: 320px;
+    box-shadow: var(--box-shadow-minimal);
+    transition: box-shadow 0.2s ease;
+    background-color: lightgray;
+    aspect-ratio: 3/1;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0;
+}
+
+.post-card-blank:hover {
+    box-shadow: var(--box-shadow-hover);
+    border-width: 50px;
+}
+
+.post-card:hover {
+    box-shadow: var(--box-shadow-hover);
+    border-width: 50px;
+}
+
+.post-card:hover > .post-card-options{
+    display: block;
+}
+
+.post-card-content {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+}
+
+.post-card-content > h1 {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+
+.post-card-content > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0;
+    margin: 0;
+}
+
+.post-card-options {
+    display: none;
+}
+
+.post-card-options > button {
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    font-size: 28px;
+    padding: 5px;
+    margin: 0;
+
+    /* transition: font-size 0.2s ease;*/
+}
+
+.post-card-options > button:hover {
+    background-color: #fdc199;
+    border-radius: 10px;
+    /* font-size: 28px; */
+    padding: 5px;
+    margin: 0;
 }
 
 button {
     background-color: beige;
+}
+
+footer {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: salmon;
+    height: 40px;
+}
+
+.animation-fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInSlideRight {
+    from {
+        opacity: 0;
+        transform: translateX(350px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
 }
 
 @media (max-width: 768px) {
