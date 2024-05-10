@@ -84,6 +84,7 @@ fastify.register(fastifyView, {
             main: '/partials/main.hbs',
             header: '/partials/header.hbs',
             footer: '/partials/footer.hbs',
+            editor: '/partials/editor.hbs',
             postsList: '/partials/postsList.hbs',
             posts: '/partials/posts.hbs',
         }
@@ -92,9 +93,16 @@ fastify.register(fastifyView, {
 
 fastify.register(fastifyStatic, {
     root: path.join(__dirname,'../client/public'),
-    prefix: '/',
+    prefix: '/app',
     serve: true,
     constraints: {}
+});
+
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname,'../client/public'),
+    prefix: '/',
+    serve: true,
+    decorateReply: false
 });
 
 export {
