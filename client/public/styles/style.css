@@ -228,15 +228,17 @@ footer {
 }
 
 #editorjs {
+    background-color: white;
     min-height: 100%;
-    background-color: whitesmoke;
-    padding-left: 100px;
-    padding-right: 100px;
+    height: fit-content;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .codex-editor {
-    min-height: 100%;
     background-color: white;
+    min-height: 100%;
+    height: 100%;
     z-index: 0;
     padding: 0;
     margin: 0;
@@ -245,7 +247,14 @@ footer {
 
 .ce-block__content, 
 .ce-toolbar__content {
-    max-width: 100%;
+    background-color: white;
+    max-width: 650px;
+    padding: 0px;
+}
+
+.codex-editor__redactor {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
 }
 
 .ce-toolbar__actions {
@@ -264,9 +273,12 @@ footer {
 
 }
 
+.ce-paragraph {
+    border-bottom: 1px solid whitesmoke !important;
+}
+
 @media (max-width: 650px) {
     #editorjs {
-        padding-left: 0;
-        padding-right: 0;
+
     }
 }
