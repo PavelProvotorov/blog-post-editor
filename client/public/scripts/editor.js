@@ -1,5 +1,7 @@
 function initializeEditor() {
     var editor = new EditorJS({
+        autofocus: false,
+        placeholder: 'Let`s write a lovely poem!',
         onReady: () => {
             console.log('Editor.js is ready to work!')
         }
