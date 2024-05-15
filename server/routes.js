@@ -1,11 +1,8 @@
 import {getAllPosts, addNewPost} from './database.js'
 
 async function app_routes (fastify, options) {
-    fastify.route({
-        method: "GET",
-        url: "/app/api/posts",
-        schema: {
-        },
+    fastify.get("/api/posts", {
+        schema: {},
         attachValidation: false,
         handler: async function(request, reply) {
             reply.type('application/json')
@@ -22,9 +19,7 @@ async function app_routes (fastify, options) {
         }
     });
 
-    fastify.route({
-        method: "POST",
-        url: "/app/api/posts",
+    fastify.post("/api/createPost", {
         schema: {
             body: { $ref: 'add_post#'}
         },
@@ -48,8 +43,7 @@ async function app_routes (fastify, options) {
                 })
             }
         }
-    });
-};
+    })};
 
 async function path_routes(fastify, options) {
     fastify.get('/', {
