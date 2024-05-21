@@ -36,12 +36,18 @@ document.addEventListener('htmx:afterSwap', (event) => {
 SAVE_BUTTON.addEventListener("click", async (event) => {
     try {
         const data = await editorOutput()
-        axios.post('/api/createPost', {
-            title: document.getElementById("ce-title").textContent,
-            content: JSON.stringify(data.blocks),
-            timestamp: data.time
-        });
+        await fetch('/api/createPost', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: document.getElementById("ce-title").textContent,
+                content: JSON.stringify(data.blocks),
+                timestamp: data.time
+            })
+        })
     } catch (error) {
         console.error(error)
-    };
+    }
 });
