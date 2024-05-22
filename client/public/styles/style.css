@@ -284,8 +284,8 @@ footer {
     background-color: whitesmoke;
     border-radius: 5px;
     line-height: 1.6em;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    max-width: 650px;
+    margin: 20px auto;
     font-size: xx-large;
     font-weight: 900;
 }

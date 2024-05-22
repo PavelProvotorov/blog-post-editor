@@ -9,7 +9,7 @@ const ADD_POST = {
         },
         "content": { 
             type: 'string',
-            minLength: 1,
+            minLength: 5,
             pattern: "^.*\\S.*$"
         },
     },

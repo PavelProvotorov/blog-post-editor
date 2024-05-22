@@ -85,7 +85,6 @@ fastify.register(fastifyView, {
             header: '/partials/header.hbs',
             footer: '/partials/footer.hbs',
             editor: '/partials/editor.hbs',
-            postsList: '/partials/postsList.hbs',
             posts: '/partials/posts.hbs',
         }
     }
